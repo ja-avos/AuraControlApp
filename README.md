@@ -171,8 +171,3 @@ The project is organized into the following directories:
 - Firestore is used for storing categories, commands, and logs.
 - Firebase Authentication can be added for user management (future enhancement).
 - Follow the steps in `firebase_options.dart` for configuration.
-
-## Future Enhancements
-- Add real-time log streaming for debugging.
-- Implement video previews for commands in the Command Details screen.
-- Integrate advanced analytics for user behavior and app performance.
