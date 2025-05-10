@@ -1,31 +1,110 @@
 # Aura Control App
 
-Una aplicación de Flutter con buenas prácticas de programación y arquitectura limpia. Esta aplicación es para controlar un robot humanoide Unitree G1 a traves de una conexión SSH al robot. La app debe cumplir con lo siguiente:
-    - Debe tener una splash screen.
-    - Debe implementar conectividad eventual.
-        - En la red de internet conectada, la ip 192.168.123.164 debe responder correctamente un ping. Esto significa que el robot está conectado.
-        - Se debe hacer ping a esa IP cada cierto tiempo (configurable) y mantener un indicador en la pantalla del estado de conexión.
-        - Si el robot no está conectado, debe aparecer una pantalla que muestre al usuario que no hay conexión e invitar a cambiar de red wifi para escoger la red del robot.
-        - Si el robot está conectado, las funciones se habilitan para controlar el robot.
-    - Debe ser navegable. Esto debe permitir entrar y salir (con atrás) a las diferentes secciones de la app.
-    - Debe tener categorías de comandos en el inicio.
-    - Al entrar a una categoría se muestran los comandos disponibles de esa categoría.
-    - Las categorías y comandos se extraen de una colección de firestore. Indícame la mejor forma de organizarlo y los pasos para configurar firebase en la web y en la app.
-    - Cada comando tiene un nombre, una descripción y un nombre de archivo vinculado, y si es básico o avanzado.
-    - Al mostrar los comandos, cada comando debe ser una card donde muestre el nombre y tenga un botón de "Play" rápido. Si se toca Play se ejecuta el comando, si se toca el resto de la card, entra al detalle de la card.
-    - En el detalle del comando, se muestra el nombre, la categoría, la descripción, un botón de play (puede ser flotante) y una sección para mostrar el video de lo que hace el comando (esto es un desarrollo futuro).
-    - La aplicación debe tener una sección de logs donde se pueden ver todos los logs (y filtros) que se ha generado tanto en la interacción usuario-app y app-robot. Para esto toda la app debe implementar logs significativos y tener un mecanismo de almacenamiento.
-    - Debe tener una sección de configuración donde se puede ajustar:
-        - Light/Dark/Auto theme.
-        - Idioma. En/Es
-        - La ip del robot.
-        - Tiempo del intervalo del healthcheck al robot (ping a ip).
-        - Directorio remoto donde se encuentran los archivos que corresponden a los comandos. Si el robot está conectado, este input debe ser un navegador a la carpeta deseada (utilizando SSH) al robot o permitir la ruta en texto plano.
-        - Usuario y contraseña para conexión SSH con el robot.
-    - Debe tener una opción de copiar archivos locales del celular al robot a un directorio específico (por defecto el directorio de comandos).
-    - Debe tener un botón para conectarse al robot por SSH redireccionando a Termux.
-    - Lógica de los comandos:
-        - Cada comando tiene un archivo vinculado. Para ejecutar un comando se debe conectar por SSH al robot, dirigirse al directorio de comandos y ejecutar lo siguiente: python3 <archivo_comando> eth0 si es básico. Si es avanzado se ejecuta: <nombre_archivo> que contendría el comando completo.
+## Flutter Application for Unitree G1 Robot Control
+
+This Flutter application is designed to control a Unitree G1 humanoid robot via an SSH connection. It adheres to clean architecture principles and incorporates best programming practices. Below are the key features and requirements of the app:
+
+### Features and Requirements
+
+1. **Splash Screen**:
+    - The app should display a splash screen during startup.
+
+2. **Connectivity Management**:
+    - The app must implement periodic connectivity checks.
+    - The robot's IP address (`192.168.123.164`) should respond to a ping to confirm connectivity.
+    - A configurable interval should determine how often the ping is sent.
+    - The app should display a connection status indicator on the screen.
+    - If the robot is not connected:
+      - Show a screen informing the user of the disconnection.
+      - Prompt the user to switch to the robot's Wi-Fi network.
+    - If the robot is connected:
+      - Enable the app's control functions.
+
+3. **Navigation**:
+    - The app should support seamless navigation between different sections, with proper back navigation.
+
+4. **Command Categories**:
+    - The home screen should display categories of commands.
+    - Upon selecting a category, the available commands within that category should be displayed.
+
+5. **Command Management**:
+    - Commands and categories should be stored in a Firestore collection.
+    - Each command should include:
+      - A name.
+      - A description.
+      - A linked file name.
+      - A type (basic or advanced).
+    - Commands should be displayed as cards:
+      - Each card should show the command name and include a "Play" button for quick execution.
+      - Tapping the card (outside the "Play" button) should navigate to the command's detail screen.
+    - The command detail screen should display:
+      - The command name.
+      - The category.
+      - The description.
+      - A floating "Play" button.
+      - A placeholder for a video preview (future enhancement).
+
+6. **Logs Section**:
+    - The app should include a logs section to display all logs generated from user-app and app-robot interactions.
+    - Logs should be meaningful and stored persistently.
+    - Provide filtering options for logs.
+
+7. **Settings Section**:
+    - The app should include a settings section to configure:
+      - Theme (Light/Dark/Auto).
+      - Language (English/Spanish).
+      - Robot's IP address.
+      - Health check interval (ping frequency).
+      - Remote directory for command files (with SSH-based folder navigation or plain text input).
+      - SSH username and password for robot connection.
+
+8. **File Management**:
+    - The app should allow copying local files from the device to a specific directory on the robot (defaulting to the commands directory).
+
+9. **SSH Integration**:
+    - Include a button to connect to the robot via SSH, redirecting to Termux.
+
+10. **Command Execution Logic**:
+     - Each command is linked to a file.
+     - To execute a command:
+        - Connect to the robot via SSH.
+        - Navigate to the commands directory.
+        - Run the following:
+          - For basic commands: `python3 <command_file> eth0`.
+          - For advanced commands: Execute the file directly (`<command_file>`), which contains the full command.
+
+### Firestore Organization and Firebase Configuration
+
+1. **Firestore Structure**:
+    - Use the following structure for storing categories and commands:
+      ```
+      categories/
+         <category_id>/
+            name: <category_name>
+            commands/
+              <command_id>/
+                 name: <command_name>
+                 description: <command_description>
+                 file_name: <file_name>
+                 type: <basic|advanced>
+      ```
+
+2. **Firebase Configuration**:
+    - Follow these steps to configure Firebase for the app:
+      - Set up a Firebase project in the [Firebase Console](https://console.firebase.google.com/).
+      - Add the app to the Firebase project (for Android, iOS, and Web platforms).
+      - Download the `google-services.json` (Android) and `GoogleService-Info.plist` (iOS) files and place them in the respective directories.
+      - For the web, configure Firebase in the `firebase_options.dart` file.
+      - Enable Firestore in the Firebase Console and set up the database rules.
+
+### Future Enhancements
+
+- Add real-time log streaming for debugging.
+- Implement video previews for commands in the Command Details screen.
+- Integrate advanced analytics to monitor user behavior and app performance.
+- Expand support for additional languages and themes.
+
+This application aims to provide a robust and user-friendly interface for controlling the Unitree G1 robot while maintaining high standards of code quality and architecture.
 
 ## Clean Architecture
 The Aura Control App follows the principles of Clean Architecture to ensure scalability, maintainability, and testability. The architecture is divided into three main layers:
