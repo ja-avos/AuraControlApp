@@ -1,0 +1,18 @@
+{
+  "appTitle": "Aura Control",
+  "settings": "Settings",
+  "language": "Language",
+  "darkMode": "Dark Mode",
+  "robotIp": "Robot IP",
+  "logs": "Logs",
+  "categories": "Categories",
+  "commands": "Commands",
+  "execute": "Execute",
+  "info": "Info",
+  "warning": "Warning",
+  "error": "Error",
+  "all": "All",
+  "selectLanguage": "Select Language",
+  "english": "English",
+  "spanish": "Spanish"
+}

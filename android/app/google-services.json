@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "211691151888",
+    "project_id": "aura-control-app",
+    "storage_bucket": "aura-control-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211691151888:android:d1076136ed1867e98ee095",
+        "android_client_info": {
+          "package_name": "com.example.aura_control"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjbu1kR_uYFzO7Yh1t9Y8Gk2YlOMJQwcA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
