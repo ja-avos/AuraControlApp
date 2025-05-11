@@ -27,6 +27,14 @@ class Logger {
     final timestamp = DateTime.now().toIso8601String();
     final logEntry = '[$timestamp][$level] $message\n';
 
+    // Capture file and line number
+    final callerInfo = _getCallerInfo();
+    metadata = {
+      ...?metadata,
+      'file': callerInfo['file'],
+      'line': callerInfo['line'],
+    };
+
     try {
       // Write to local file
       await _logFile.writeAsString(logEntry, mode: FileMode.append);
@@ -40,7 +48,7 @@ class Logger {
         'timestamp': timestamp,
         'level': level,
         'message': message,
-        'metadata': metadata ?? {},
+        'metadata': metadata,
       });
     } catch (e) {
       print('Failed to write log to Firebase: $e');
@@ -66,5 +74,20 @@ class Logger {
     } catch (e) {
       print('Failed to clear logs: $e');
     }
+  }
+
+  Map<String, String> _getCallerInfo() {
+    final stackTrace = StackTrace.current.toString().split('\n');
+    if (stackTrace.length > 2) {
+      final callerFrame = stackTrace[2]; // The caller is typically at index 2
+      final match = RegExp(r'^(.*?):(\d+):\d+').firstMatch(callerFrame);
+      if (match != null) {
+        return {
+          'file': match.group(1) ?? 'unknown',
+          'line': match.group(2) ?? 'unknown',
+        };
+      }
+    }
+    return {'file': 'unknown', 'line': 'unknown'};
   }
 }

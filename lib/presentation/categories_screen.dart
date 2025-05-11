@@ -1,3 +1,5 @@
+import 'package:aura_control/domain/execute_command_usecase.dart';
+import 'package:aura_control/presentation/settings_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
@@ -85,9 +87,14 @@ class CommandsScreen extends StatefulWidget {
 }
 
 class _CommandsScreenState extends State<CommandsScreen> {
+  late final ExecuteCommandUseCase _executeCommandUseCase;
+
   @override
   void initState() {
     super.initState();
+    _executeCommandUseCase = ExecuteCommandUseCase(
+      context.read<SettingsNotifier>(),
+    );
     final notifier = context.read<CategoriesNotifier>();
     notifier.fetchCommands(widget.categoryId);
   }
@@ -118,7 +125,7 @@ class _CommandsScreenState extends State<CommandsScreen> {
                       subtitle: Text(command.description),
                       trailing: IconButton(
                         icon: const Icon(Icons.play_arrow),
-                        onPressed: () {
+                        onPressed: () async {
                           Logger().log(
                             'Info',
                             'Executing command',
@@ -127,7 +134,27 @@ class _CommandsScreenState extends State<CommandsScreen> {
                               'commandName': command.name,
                             },
                           );
-                          // Execute command logic here
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Executing command...'),
+                            ),
+                          );
+                          await _executeCommandUseCase.execute(command);
+                          Logger().log(
+                            'Info',
+                            'Command executed successfully',
+                            metadata: {
+                              'commandId': command.id,
+                              'commandName': command.name,
+                            },
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Command executed: ${command.name}',
+                              ),
+                            ),
+                          );
                         },
                       ),
                       onTap: () {

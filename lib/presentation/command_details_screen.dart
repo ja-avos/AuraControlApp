@@ -1,8 +1,9 @@
+import 'package:aura_control/presentation/settings_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../domain/models/command.dart';
 import '../core/logger.dart';
 import 'categories_notifier.dart';
+import '../domain/execute_command_usecase.dart';
 
 class CommandDetailsScreen extends StatefulWidget {
   final String commandId;
@@ -14,11 +15,16 @@ class CommandDetailsScreen extends StatefulWidget {
 }
 
 class _CommandDetailsScreenState extends State<CommandDetailsScreen> {
+  late final ExecuteCommandUseCase _executeCommandUseCase;
+
   @override
   void initState() {
     super.initState();
     final notifier = context.read<CategoriesNotifier>();
     notifier.fetchCommandById(widget.commandId);
+    _executeCommandUseCase = ExecuteCommandUseCase(
+      context.read<SettingsNotifier>(),
+    );
   }
 
   @override
@@ -71,7 +77,7 @@ class _CommandDetailsScreenState extends State<CommandDetailsScreen> {
                 ),
                 const SizedBox(height: 16.0),
                 ElevatedButton.icon(
-                  onPressed: () {
+                  onPressed: () async {
                     Logger().log(
                       'Info',
                       'Executing command from details screen',
@@ -80,7 +86,37 @@ class _CommandDetailsScreenState extends State<CommandDetailsScreen> {
                         'commandName': command.name,
                       },
                     );
-                    // Add logic to execute the command
+                    try {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Executing command...')),
+                      );
+                      final result = await _executeCommandUseCase.execute(
+                        command,
+                      );
+                      Logger().log(
+                        'Info',
+                        'Command executed successfully',
+                        metadata: {'result': result},
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Command executed successfully: $result',
+                          ),
+                        ),
+                      );
+                    } catch (e) {
+                      Logger().log(
+                        'Error',
+                        'Failed to execute command',
+                        metadata: {'error': e.toString()},
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Failed to execute command: $e'),
+                        ),
+                      );
+                    }
                   },
                   icon: const Icon(Icons.play_arrow),
                   label: const Text('Execute Command'),
