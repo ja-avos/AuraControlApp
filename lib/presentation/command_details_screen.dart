@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../core/logger.dart';
 import 'categories_notifier.dart';
 import '../domain/execute_command_usecase.dart';
+import '../l10n/app_localizations.dart';
 
 class CommandDetailsScreen extends StatefulWidget {
   final String commandId;
@@ -33,14 +34,18 @@ class _CommandDetailsScreenState extends State<CommandDetailsScreen> {
       builder: (context, notifier, child) {
         if (notifier.isLoading) {
           return Scaffold(
-            appBar: AppBar(title: const Text('Command Details')),
+            appBar: AppBar(
+              title: Text(AppLocalizations.of(context)!.commandDetails),
+            ),
             body: const Center(child: CircularProgressIndicator()),
           );
         }
         final command = notifier.command;
         if (command == null) {
           return Scaffold(
-            appBar: AppBar(title: const Text('Command Details')),
+            appBar: AppBar(
+              title: Text(AppLocalizations.of(context)!.commandDetails),
+            ),
             body: const Center(
               child: Text(
                 'Command not found',
@@ -88,7 +93,11 @@ class _CommandDetailsScreenState extends State<CommandDetailsScreen> {
                     );
                     try {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Executing command...')),
+                        SnackBar(
+                          content: Text(
+                            AppLocalizations.of(context)!.executingCommand,
+                          ),
+                        ),
                       );
                       final result = await _executeCommandUseCase.execute(
                         command,
@@ -101,7 +110,7 @@ class _CommandDetailsScreenState extends State<CommandDetailsScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            'Command executed successfully: $result',
+                            '${AppLocalizations.of(context)!.commandExecutedSuccessfully}: $result',
                           ),
                         ),
                       );
@@ -113,13 +122,15 @@ class _CommandDetailsScreenState extends State<CommandDetailsScreen> {
                       );
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Failed to execute command: $e'),
+                          content: Text(
+                            '${AppLocalizations.of(context)!.failedToExecuteCommand}: $e',
+                          ),
                         ),
                       );
                     }
                   },
                   icon: const Icon(Icons.play_arrow),
-                  label: const Text('Execute Command'),
+                  label: Text(AppLocalizations.of(context)!.executeCommand),
                 ),
               ],
             ),

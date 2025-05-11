@@ -103,4 +103,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get enterPingInterval => 'Enter Ping Interval';
+
+  @override
+  String get commandDetails => 'Command Details';
+
+  @override
+  String get executingCommand => 'Executing command...';
+
+  @override
+  String get commandExecutedSuccessfully => 'Command executed successfully';
+
+  @override
+  String get failedToExecuteCommand => 'Failed to execute command';
+
+  @override
+  String get executeCommand => 'Execute Command';
+
+  @override
+  String get goToCategories => 'Go to Categories';
+
+  @override
+  String get goToSettings => 'Go to Settings';
+
+  @override
+  String get checkConnection => 'Check Connection';
+
+  @override
+  String get spanishLanguage => 'Español';
+
+  @override
+  String get englishLanguage => 'English';
 }

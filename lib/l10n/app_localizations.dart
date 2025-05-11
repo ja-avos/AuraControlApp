@@ -286,6 +286,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter Ping Interval'**
   String get enterPingInterval;
+
+  /// No description provided for @commandDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Command Details'**
+  String get commandDetails;
+
+  /// No description provided for @executingCommand.
+  ///
+  /// In en, this message translates to:
+  /// **'Executing command...'**
+  String get executingCommand;
+
+  /// No description provided for @commandExecutedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Command executed successfully'**
+  String get commandExecutedSuccessfully;
+
+  /// No description provided for @failedToExecuteCommand.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to execute command'**
+  String get failedToExecuteCommand;
+
+  /// No description provided for @executeCommand.
+  ///
+  /// In en, this message translates to:
+  /// **'Execute Command'**
+  String get executeCommand;
+
+  /// No description provided for @goToCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Categories'**
+  String get goToCategories;
+
+  /// No description provided for @goToSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Settings'**
+  String get goToSettings;
+
+  /// No description provided for @checkConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'Check Connection'**
+  String get checkConnection;
+
+  /// No description provided for @spanishLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Español'**
+  String get spanishLanguage;
+
+  /// No description provided for @englishLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get englishLanguage;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

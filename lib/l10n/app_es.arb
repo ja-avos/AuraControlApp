@@ -30,5 +30,15 @@
   "resetConfirmation": "¿Está seguro de que desea restablecer todas las configuraciones a sus valores predeterminados?",
   "confirm": "Confirmar",
   "pingInterval": "Intervalo de Ping",
-  "enterPingInterval": "Ingrese el Intervalo de Ping"
+  "enterPingInterval": "Ingrese el Intervalo de Ping",
+  "commandDetails": "Detalles del Comando",
+  "executingCommand": "Ejecutando comando...",
+  "commandExecutedSuccessfully": "Comando ejecutado con éxito",
+  "failedToExecuteCommand": "Error al ejecutar el comando",
+  "executeCommand": "Ejecutar Comando",
+  "goToCategories": "Ir a Categorías",
+  "goToSettings": "Ir a Configuración",
+  "checkConnection": "Verificar Conexión",
+  "spanishLanguage": "Español",
+  "englishLanguage": "Inglés"
 }

@@ -30,5 +30,15 @@
   "resetConfirmation": "Are you sure you want to reset all settings to their default values?",
   "confirm": "Confirm",
   "pingInterval": "Ping Interval",
-  "enterPingInterval": "Enter Ping Interval"
+  "enterPingInterval": "Enter Ping Interval",
+  "commandDetails": "Command Details",
+  "executingCommand": "Executing command...",
+  "commandExecutedSuccessfully": "Command executed successfully",
+  "failedToExecuteCommand": "Failed to execute command",
+  "executeCommand": "Execute Command",
+  "goToCategories": "Go to Categories",
+  "goToSettings": "Go to Settings",
+  "checkConnection": "Check Connection",
+  "spanishLanguage": "Español",
+  "englishLanguage": "English"
 }
