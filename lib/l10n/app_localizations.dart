@@ -346,6 +346,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'English'**
   String get englishLanguage;
+
+  /// No description provided for @fileTransfer.
+  ///
+  /// In en, this message translates to:
+  /// **'File Transfer'**
+  String get fileTransfer;
+
+  /// No description provided for @selectFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Select File'**
+  String get selectFile;
+
+  /// No description provided for @noFileSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'No file selected'**
+  String get noFileSelected;
+
+  /// No description provided for @fileTransferSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'File transferred successfully'**
+  String get fileTransferSuccess;
+
+  /// No description provided for @fileTransferFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to transfer file'**
+  String get fileTransferFailed;
+
+  /// No description provided for @selectedFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected File'**
+  String get selectedFile;
+
+  /// No description provided for @transferFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Transfer File'**
+  String get transferFile;
+
+  /// No description provided for @changeWifiNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Wi-Fi Network'**
+  String get changeWifiNetwork;
+
+  /// No description provided for @enterValidPath.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid path'**
+  String get enterValidPath;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

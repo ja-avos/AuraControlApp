@@ -133,4 +133,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get englishLanguage => 'English';
+
+  @override
+  String get fileTransfer => 'File Transfer';
+
+  @override
+  String get selectFile => 'Select File';
+
+  @override
+  String get noFileSelected => 'No file selected';
+
+  @override
+  String get fileTransferSuccess => 'File transferred successfully';
+
+  @override
+  String get fileTransferFailed => 'Failed to transfer file';
+
+  @override
+  String get selectedFile => 'Selected File';
+
+  @override
+  String get transferFile => 'Transfer File';
+
+  @override
+  String get changeWifiNetwork => 'Change Wi-Fi Network';
+
+  @override
+  String get enterValidPath => 'Please enter a valid path';
 }

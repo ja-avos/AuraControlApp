@@ -25,4 +25,12 @@ class Command {
       isBasic: data['isBasic'] ?? true,
     );
   }
+
+  Map<String, dynamic> get fields => {
+    'id': id,
+    'name': name,
+    'description': description,
+    'fileName': fileName,
+    'isBasic': isBasic,
+  };
 }

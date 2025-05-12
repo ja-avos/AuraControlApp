@@ -40,5 +40,14 @@
   "goToSettings": "Ir a Configuración",
   "checkConnection": "Verificar Conexión",
   "spanishLanguage": "Español",
-  "englishLanguage": "Inglés"
+  "englishLanguage": "Inglés",
+  "fileTransfer": "Transferencia de Archivos",
+  "selectFile": "Seleccionar Archivo",
+  "noFileSelected": "No se seleccionó ningún archivo",
+  "fileTransferSuccess": "Archivo transferido con éxito",
+  "fileTransferFailed": "Error al transferir el archivo",
+  "selectedFile": "Archivo Seleccionado",
+  "transferFile": "Transferir Archivo",
+  "changeWifiNetwork": "Cambiar Red Wi-Fi",
+  "enterValidPath": "Por favor, ingrese una ruta válida"
 }

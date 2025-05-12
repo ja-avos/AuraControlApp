@@ -40,5 +40,14 @@
   "goToSettings": "Go to Settings",
   "checkConnection": "Check Connection",
   "spanishLanguage": "Español",
-  "englishLanguage": "English"
+  "englishLanguage": "English",
+  "fileTransfer": "File Transfer",
+  "selectFile": "Select File",
+  "noFileSelected": "No file selected",
+  "fileTransferSuccess": "File transferred successfully",
+  "fileTransferFailed": "Failed to transfer file",
+  "selectedFile": "Selected File",
+  "transferFile": "Transfer File",
+  "changeWifiNetwork": "Change Wi-Fi Network",
+  "enterValidPath": "Please enter a valid path"
 }

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'categories_notifier.dart';
 import '../core/logger.dart';
+import '../core/constants.dart';
 
 const EdgeInsets _defaultMargin = EdgeInsets.symmetric(
   horizontal: 16.0,
@@ -32,47 +33,47 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Categories')),
-      body:
-          notifier.isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : ListView.builder(
-                itemCount: notifier.categories.length,
-                itemBuilder: (context, index) {
-                  final category = notifier.categories[index];
-                  Logger().log(
-                    'Info',
-                    'Rendering category item',
-                    metadata: {
-                      'categoryId': category.id,
-                      'categoryName': category.name,
-                    },
-                  );
-                  return Card(
-                    margin: _defaultMargin,
-                    elevation: 4.0,
-                    child: ListTile(
-                      title: Text(
-                        category.name,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                        ),
-                      ),
-                      onTap: () {
-                        Logger().log(
-                          'Info',
-                          'Category selected',
-                          metadata: {
-                            'categoryId': category.id,
-                            'categoryName': category.name,
-                          },
-                        );
-                        context.push('/categories/${category.id}');
+      body: Padding(
+        padding: kDefaultMargin,
+        child:
+            notifier.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                  itemCount: notifier.categories.length,
+                  itemBuilder: (context, index) {
+                    final category = notifier.categories[index];
+                    Logger().log(
+                      'Info',
+                      'Rendering category item',
+                      metadata: {
+                        'categoryId': category.id,
+                        'categoryName': category.name,
                       },
-                    ),
-                  );
-                },
-              ),
+                    );
+                    return Card(
+                      margin: const EdgeInsets.only(bottom: 8.0),
+                      elevation: 4.0,
+                      child: ListTile(
+                        title: Text(
+                          category.name,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        onTap: () {
+                          Logger().log(
+                            'Info',
+                            'Category selected',
+                            metadata: {
+                              'categoryId': category.id,
+                              'categoryName': category.name,
+                            },
+                          );
+                          context.push('/categories/${category.id}');
+                        },
+                      ),
+                    );
+                  },
+                ),
+      ),
     );
   }
 }

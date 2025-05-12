@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../core/logger.dart';
+import '../core/constants.dart';
 
 class LogsScreen extends StatefulWidget {
   const LogsScreen({super.key});
@@ -113,16 +114,19 @@ class _LogsScreenState extends State<LogsScreen> {
           ),
         ],
       ),
-      body:
-          filteredLogs.isEmpty
-              ? const Center(child: Text('No logs available'))
-              : ListView.builder(
-                controller: _scrollController,
-                itemCount: filteredLogs.length,
-                itemBuilder: (context, index) {
-                  return ListTile(title: Text(filteredLogs[index]));
-                },
-              ),
+      body: Padding(
+        padding: kDefaultMargin,
+        child:
+            filteredLogs.isEmpty
+                ? const Center(child: Text('No logs available'))
+                : ListView.builder(
+                  controller: _scrollController,
+                  itemCount: filteredLogs.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(title: Text(filteredLogs[index]));
+                  },
+                ),
+      ),
       floatingActionButton:
           _isAtBottom
               ? null

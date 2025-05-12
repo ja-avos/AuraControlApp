@@ -54,16 +54,6 @@ class ConnectivityNotifier extends ChangeNotifier {
           'timestamp': DateTime.now().toIso8601String(),
         },
       );
-    } else {
-      Logger().log(
-        'Info',
-        'Connectivity status unchanged',
-        metadata: {
-          'isConnected': _isConnected,
-          'robotIp': robotIp,
-          'timestamp': DateTime.now().toIso8601String(),
-        },
-      );
     }
   }
 

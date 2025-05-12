@@ -22,6 +22,8 @@ dependencies:
     sdk: flutter
   flutter_gen: ^5.10.0
   intl: any
+  file_picker: ^10.1.7
+  android_intent_plus: ^5.3.0
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +35,7 @@ flutter:
   generate: true
   assets:
     - lib/l10n/
+    - assets/AuraYSeneca.png
 
 flutter_native_splash:
   color: "#ffffff"

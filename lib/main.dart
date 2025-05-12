@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:aura_control/presentation/categories_screen.dart';
 import 'package:aura_control/presentation/logs_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,9 @@ import 'presentation/settings_notifier.dart';
 import 'data/settings_repository_impl.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'l10n/app_localizations.dart';
+import 'presentation/file_transfer_screen.dart';
+import 'core/constants.dart';
+import 'package:android_intent_plus/android_intent.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -101,6 +106,10 @@ class MainApp extends StatelessWidget {
           builder: (context, state) => const SettingsScreen(),
         ),
         GoRoute(path: '/logs', builder: (context, state) => const LogsScreen()),
+        GoRoute(
+          path: '/fileTransfer',
+          builder: (context, state) => const FileTransferScreen(),
+        ),
       ],
     );
 
@@ -159,46 +168,116 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Center(
-        child:
-            isConnected
-                ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () => context.push('/categories'),
-                      child: const Text('Go to Categories'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () => context.push('/settings'),
-                      child: const Text('Go to Settings'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        context
-                            .read<ConnectivityNotifier>()
-                            .checkConnectivity();
-                      },
-                      child: const Text('Check Connection'),
-                    ),
-                  ],
-                )
-                : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(AppLocalizations.of(context)!.noConnection),
-                    ElevatedButton(
-                      onPressed: () {
-                        context
-                            .read<ConnectivityNotifier>()
-                            .checkConnectivity();
-                      },
-                      child: Text(
-                        AppLocalizations.of(context)!.retryConnection,
+      body: Padding(
+        padding: kDefaultMargin,
+        child: Center(
+          child:
+              isConnected
+                  ? Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 36.0),
+                        child: Image.asset(
+                          'assets/AuraYSeneca.png',
+                          height: 250.0,
+                          fit: BoxFit.contain,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                      Expanded(
+                        child: ListView(
+                          children: [
+                            Card(
+                              margin: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: ListTile(
+                                leading: const Icon(Icons.category),
+                                title: Text(
+                                  AppLocalizations.of(context)!.categories,
+                                ),
+                                onTap: () => context.push('/categories'),
+                              ),
+                            ),
+                            Card(
+                              margin: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: ListTile(
+                                leading: const Icon(Icons.file_upload),
+                                title: Text(
+                                  AppLocalizations.of(context)!.fileTransfer,
+                                ),
+                                onTap: () => context.push('/fileTransfer'),
+                              ),
+                            ),
+                            Card(
+                              margin: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: ListTile(
+                                leading: const Icon(Icons.settings),
+                                title: Text(
+                                  AppLocalizations.of(context)!.settings,
+                                ),
+                                onTap: () => context.push('/settings'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
+                  : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.wifi_off,
+                        size: 60.0,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                      const SizedBox(height: 24.0),
+                      Text(
+                        AppLocalizations.of(context)!.noConnection,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 16.0),
+                      ElevatedButton(
+                        onPressed: () {
+                          context
+                              .read<ConnectivityNotifier>()
+                              .checkConnectivity();
+                        },
+                        child: Text(
+                          AppLocalizations.of(context)!.retryConnection,
+                        ),
+                      ),
+                      const SizedBox(height: 16.0),
+                      ElevatedButton(
+                        onPressed: () {
+                          context.push('/settings');
+                        },
+                        child: Text(AppLocalizations.of(context)!.settings),
+                      ),
+                      const SizedBox(height: 16.0),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Logic to open Wi-Fi settings
+                          Logger().log('Info', 'Opening Wi-Fi settings');
+                          // Use a platform-specific method to open Wi-Fi settings
+                          if (Platform.isAndroid) {
+                            final intent = AndroidIntent(
+                              action: 'android.settings.WIFI_SETTINGS',
+                            );
+                            intent.launch();
+                          } else {
+                            throw UnimplementedError(
+                              'Opening Wi-Fi settings is not implemented for this platform',
+                            );
+                          }
+                        },
+                        child: Text(
+                          AppLocalizations.of(context)!.changeWifiNetwork,
+                        ),
+                      ),
+                      const SizedBox(height: 16.0),
+                    ],
+                  ),
+        ),
       ),
     );
   }
